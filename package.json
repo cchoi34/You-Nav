@@ -1,0 +1,19 @@
+{
+  "name": "you-nav",
+  "version": "0.0.1",
+  "description": "A chrome extension to navigate through youtube playlists off of the tab",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cchoi34/You-Nav.git"
+  },
+  "author": "Christopher Choi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cchoi34/You-Nav/issues"
+  },
+  "homepage": "https://github.com/cchoi34/You-Nav#readme"
+}
