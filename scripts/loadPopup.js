@@ -1,11 +1,8 @@
 const popup = document.getElementById("popup");
 
-chrome.tabs.query({
-    url: "*://www.youtube.com/watch?v*",
-}, (tabs) => {
-    createNavbar(tabs);
-    assignEventListeners(tabs);
-})
+function destroyCurrentNodes() {
+    popup.innerHTML = '';
+}
 
 function createNavbar(tabs) {
     tabs.forEach(tab => {
@@ -22,13 +19,14 @@ function createNavbar(tabs) {
         else {
             cleanTitle = rawTitle;
         }
+        let playButton = tab.paused ? "fa-play" : "fa-pause";
 
         const html = `<section class="single-tab">
                         <h2>${cleanTitle}</h2>
                             <section class="navbar">
                                 <i class="fa fa-retweet fa-2x" id=${"loop" + tab.id}></i>
                                 <i class="fa fa-step-backward fa-2x" id=${"previous" + tab.id}></i>
-                                <i class="fa fa-play fa-2x" id=${"play-pause" + tab.id}></i>
+                                <i class="fa ${playButton} fa-2x" id=${"play-pause" + tab.id}></i>
                                 <i class="fa fa-step-forward fa-2x" id=${"next" + tab.id}></i>
                                 <i class="fa fa-volume-up fa-2x" id=${"volume" + tab.id}></i>
                             </section>

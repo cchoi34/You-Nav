@@ -1,11 +1,28 @@
-const port = chrome.extension.connect({
+const port = chrome.runtime.connect({
     name: "update Popup"
 });
 
-port.postMessage("Clicked Popup");
+const state = {
+    tabs: []
+}
+
+function setState(newState) {
+    if (newState.tabs) {
+        state.tabs = newState.tabs;
+    }
+    else {
+        console.log("Incorrect newState!");
+    }
+    destroyCurrentNodes();
+    createNavbar(state.tabs);
+    assignEventListeners(state.tabs)
+}
+
+port.postMessage("load initial data");
 
 port.onMessage.addListener(function(message) {
-    console.log("Message: ", message);
+    setState(message);
+    console.log("current State: ", state);
 })
 
 function clickPlayPause(tabId) {
@@ -31,6 +48,7 @@ function clickPlayPause(tabId) {
 
 function clickLoop(tabId) {
     console.log("Hit the loop button on tab: " + tabId);
+    port.postMessage("update state");
 }
 
 function clickPrevious(tabId) {
