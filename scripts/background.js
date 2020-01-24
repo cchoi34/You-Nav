@@ -1,4 +1,4 @@
-const initialState = {
+const state = {
     tabs: [],
 }
 
@@ -14,25 +14,41 @@ const ADD_TAB = "ADD_TAB";
 const UPDATE_TAB = "UPDATE_TAB";
 const DELETE_TAB = "DELETE_TAB";
 
-const setAllTabs = (tabs) => {
-    return {
-        
+const sendStateToPopup = (state, port) => {
+    console.log("Sending this state from background: ", state);
+    port.postMessage(state);
+}
+
+const addTab = (tab) => {
+    let uniqueTabIds = [];
+    if (state.tabs.length > 0) {
+        state.tabs.forEach(stateTab => {
+            uniqueTabIds.push(stateTab.id)
+        })
+    }
+    if (!uniqueTabIds.includes(tab.id)) {
+        state.tabs.push(tab);
     }
 }
 
-const addTab = () => {
+// const updateTab = () => {
 
+// }
+
+// const deleteTab = () => {
+
+// }
+
+const addPropertiesToTab = (tab, properties) => {
+    tab.paused = properties.paused;
+    tab.loop = properties.loop;
+    tab.volume = properties.volume;
+    tab.next = properties.next;
+    tab.previous = properties.previous;
+    addTab(tab);
 }
 
-const updateTab = () => {
-
-}
-
-const deleteTab = () => {
-
-}
-
-function setState (state = initialState, action) {
+function setState (state, action) {
     switch (action.type) {
         case SET_ALL_TABS:
         case ADD_TAB:
@@ -51,12 +67,8 @@ function getYoutubeTabs(port) {
             chrome.tabs.executeScript(tab.id, {
                 file: "scripts/execute/checkState.js"
             }, (properties) => {
-                let newTabs = [];
-                newTabs.push({tab, properties})
-                
-                state.tabs = newTabs;
-                console.log("state.tabs: ", state.tabs);
-                port.postMessage({tabs: state.tabs})
+                addPropertiesToTab(tab, properties[0]);
+                sendStateToPopup(state, port);
             })
         })
     })

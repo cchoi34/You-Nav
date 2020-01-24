@@ -40,7 +40,7 @@ function clickPlayPause(tabId) {
         else {
             playButton.classList.remove("fa-pause");
             playButton.classList.add("fa-play");
-            console.log("Video is paused");
+    
             console.log("PlayButton classList: ", playButton.classList);
         }
     })

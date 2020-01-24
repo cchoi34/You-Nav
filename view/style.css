@@ -13,6 +13,14 @@ h2 {
     margin-bottom: 0px;
 }
 
+.green {
+    color: rgb(39, 216, 39);
+}
+
+.grey {
+    color: rgb(161, 161, 161);
+}
+
 .navbar i {
     margin: 16px 8px;
     transition-property: color;

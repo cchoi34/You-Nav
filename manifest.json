@@ -3,7 +3,7 @@
     "name": "You-Nav",
     "description": "Navigate through Youtube throughout the whole browser!",
     "version": "0.0.1",
-    "permissions": ["*://*.youtube.com/*", "tabs", "activeTab", "webNavigation"],
+    "permissions": ["*://*.youtube.com/*", "tabs", "activeTab", "history"],
     "background": {
       "scripts": [
         "scripts/background.js"
