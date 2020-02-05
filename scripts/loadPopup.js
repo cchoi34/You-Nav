@@ -22,7 +22,7 @@ function createNavbar(tabs) {
         let cleanTitle;
         if (rawTitle.startsWith("(") && rawTitle.endsWith(" - YouTube")) {
             let index = rawTitle.indexOf(")"); // in the case of notifications, these will be sliced out of the title
-            cleanTitle = rawTitle.slice(index + 2, rawTitle.length - 10); // every Title from YouTube will end with "- YoutTube"
+            cleanTitle = rawTitle.slice(index + 2, rawTitle.length - 10); // every Title from YouTube will end with "- YouTube"
         }
         else if (rawTitle.startsWith("(") && !rawTitle.endsWith(" - YouTube")) {
             let index = rawTitle.indexOf(")"); // in the case of notifications, these will be sliced out of the title
@@ -31,6 +31,8 @@ function createNavbar(tabs) {
         else {
             cleanTitle = rawTitle;
         }
+        console.log("tab: ", tab);
+        console.log("TAB.Paused: ", tab.paused)
         let playButton = tab.paused ? "fa-play" : "fa-pause";
         let loopButton = tab.loop ? "green" : "grey";
         let volumeButton = determineVolumeButton(tab.volume);

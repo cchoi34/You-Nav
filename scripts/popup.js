@@ -30,18 +30,13 @@ function clickPlayPause(tabId) {
         file: "scripts/execute/playPause.js"
     }, function(isPaused) {
         const playButton = document.getElementById(`${"play-pause" + tabId}`)
-        console.log("isPaused: ", isPaused);
-        if (isPaused) {
+        if (!isPaused[0]) {
             playButton.classList.add("fa-pause");
             playButton.classList.remove("fa-play");
-            console.log("Video is playing");
-            console.log("PlayButton classList: ", playButton.classList);
         }
         else {
             playButton.classList.remove("fa-pause");
             playButton.classList.add("fa-play");
-    
-            console.log("PlayButton classList: ", playButton.classList);
         }
     })
 }
