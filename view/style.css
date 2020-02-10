@@ -28,7 +28,7 @@ h2 {
 }
 
 .navbar i:hover {
-    color: rgb(112, 2, 255);
+    color: rgb(40, 8, 219);
 }
 
 .single-tab {
@@ -39,5 +39,5 @@ h2 {
 }
 
 .single-tab:hover {
-    background-color: rgb(228, 251, 255);
+    background-color: rgb(240, 253, 255);
 }

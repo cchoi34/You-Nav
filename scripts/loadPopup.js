@@ -31,16 +31,14 @@ function createNavbar(tabs) {
         else {
             cleanTitle = rawTitle;
         }
-        console.log("tab: ", tab);
-        console.log("TAB.Paused: ", tab.paused)
         let playButton = tab.paused ? "fa-play" : "fa-pause";
-        let loopButton = tab.loop ? "green" : "grey";
+        let loopButton = tab.loop ? "fa-retweet" : "fa-random";
         let volumeButton = determineVolumeButton(tab.volume);
 
         const html = `<section class="single-tab">
                         <h2>${cleanTitle}</h2>
                             <section class="navbar">
-                                <i class="fa fa-retweet fa-2x ${loopButton}" id=${"loop" + tab.id}></i>
+                                <i class="fa ${loopButton} fa-2x" id=${"loop" + tab.id}></i>
                                 <i class="fa fa-step-backward fa-2x" id=${"previous" + tab.id}></i>
                                 <i class="fa ${playButton} fa-2x" id=${"play-pause" + tab.id}></i>
                                 <i class="fa fa-step-forward fa-2x" id=${"next" + tab.id}></i>

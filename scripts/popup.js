@@ -30,6 +30,7 @@ function clickPlayPause(tabId) {
         file: "scripts/execute/playPause.js"
     }, function(isPaused) {
         const playButton = document.getElementById(`${"play-pause" + tabId}`)
+        console.log("playButton: ", playButton);
         if (!isPaused[0]) {
             playButton.classList.add("fa-pause");
             playButton.classList.remove("fa-play");
@@ -42,7 +43,21 @@ function clickPlayPause(tabId) {
 }
 
 function clickLoop(tabId) {
-    console.log("Hit the loop button on tab: " + tabId);
+    chrome.tabs.executeScript(tabId, {
+        file: "scripts/execute/loop.js"
+    }, function(isLooped) {
+        const loopBut = document.getElementById(`${"loop" + tabId}`);
+        console.log("Loop Button: ", loopBut);
+        if (!isLooped[0]) {
+            loopBut.classList.add("fa-random");
+            loopBut.classList.remove("fa-retweet");
+        }
+        else {
+            loopBut.classList.remove("fa-random");
+            loopBut.classList.add("fa-retweet");
+        }
+    }
+    )
     port.postMessage("update state");
 }
 
