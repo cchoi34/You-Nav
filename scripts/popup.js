@@ -9,6 +9,7 @@ const state = {
 function setState(newState) {
     if (newState.tabs) {
         state.tabs = newState.tabs;
+        console.log("state: ", state);
     }
     else {
         console.log("Incorrect newState!");
@@ -29,8 +30,7 @@ function clickPlayPause(tabId) {
     chrome.tabs.executeScript(tabId, {
         file: "scripts/execute/playPause.js"
     }, function(isPaused) {
-        const playButton = document.getElementById(`${"play-pause" + tabId}`)
-        console.log("playButton: ", playButton);
+        const playButton = document.getElementById(`${"play-pause" + tabId}`);
         if (!isPaused[0]) {
             playButton.classList.add("fa-pause");
             playButton.classList.remove("fa-play");
@@ -47,7 +47,6 @@ function clickLoop(tabId) {
         file: "scripts/execute/loop.js"
     }, function(isLooped) {
         const loopBut = document.getElementById(`${"loop" + tabId}`);
-        console.log("Loop Button: ", loopBut);
         if (!isLooped[0]) {
             loopBut.classList.add("fa-random");
             loopBut.classList.remove("fa-retweet");
@@ -62,15 +61,33 @@ function clickLoop(tabId) {
 }
 
 function clickPrevious(tabId) {
-    console.log("Hit the previous button on tab: " + tabId);
+    chrome.tabs.executeScript(tabId, {
+        file: "scripts/execute/previous.js"
+    }, function(hasPrev) {
+        const prevButton = document.getElementById(`${"previous" + tabId}`);
+        console.log("HasPrev: ", hasPrev);
+    }
+    )
 }
 
 function clickNext(tabId) {
-    console.log("Hit the next button on tab: " + tabId);
+    chrome.tabs.executeScript(tabId, {
+        file: "scripts/execute/next.js"
+    }, function(hasNext) {
+        const nextButton = document.getElementById(`${"next" + tabId}`);
+        console.log("HasNext: ", hasNext);
+    }
+    )
 }
 
 function clickVolume(tabId) {
-    console.log("Hit the volume buttonon tab: " + tabId);
+    chrome.tabs.executeScript(tabId, {
+        file: "scripts/execute/volume.js"
+    }, function(volume) {
+        const volumeButton = document.getElementById(`${"volume" + tabId}`);
+        console.log("currentVolume: ", volume);
+    }
+    )
 }
 
 
