@@ -17,6 +17,7 @@ function destroyCurrentNodes() {
 }
 
 function createNavbar(tabs) {
+    console.log("TABS: ", tabs);
     tabs.forEach(tab => {
         const rawTitle = tab.title || "Open up Youtube!";
         let cleanTitle;
@@ -34,6 +35,7 @@ function createNavbar(tabs) {
         let playButton = tab.paused ? "fa-play" : "fa-pause";
         let loopButton = tab.loop ? "fa-retweet" : "fa-random";
         let volumeButton = determineVolumeButton(tab.volume);
+        let volumePercentage = Math.round(tab.volume * 100).toString();
 
         const html = `<section class="single-tab">
                         <h2>${cleanTitle}</h2>
@@ -43,6 +45,9 @@ function createNavbar(tabs) {
                                 <i class="fa ${playButton} fa-2x" id=${"play-pause" + tab.id}></i>
                                 <i class="fa fa-step-forward fa-2x" id=${"next" + tab.id}></i>
                                 <i class="fa ${volumeButton} fa-2x" id=${"volume" + tab.id}></i>
+                                <div class="slide-container hidden">
+                                    <input type="range" min="1" max="100" value=${volumePercentage} id=${"adjust-volume" + tab.id} class="slider" >
+                                </div>
                             </section>
                     </section>`;
         let newNavbar = document.createElement('div');
@@ -57,8 +62,8 @@ function assignEventListeners(tabs) {
         const previous = document.getElementById(`${"previous" + tab.id}`);
         const playPause = document.getElementById(`${"play-pause" + tab.id}`);
         const next = document.getElementById(`${"next" + tab.id}`);
-        const volume = document.getElementById(`${"volume" + tab.id}`);
-
+        const volumeMute = document.getElementById(`${"volume" + tab.id}`);
+        const volumeAdjust = document.getElementById(`${"adjust-volume" + tab.id}`)
         loop.addEventListener("click", () => {
             clickLoop(tab.id);
         })
@@ -75,9 +80,13 @@ function assignEventListeners(tabs) {
             clickNext(tab.id);
         })
 
-        volume.addEventListener("click", () => {
+        volumeMute.addEventListener("click", () => {
             clickVolume(tab.id);
         })
+
+        // volumeAdjust.addEventListener("click", () => {
+        //     adjustVolume(tab.id)
+        // })
     })
 }
 

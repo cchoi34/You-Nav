@@ -1,12 +1,10 @@
 function loadPrevious() {
     const video = document.querySelector("video");
-    const previous = document.querySelector(".ytp-prev-button");
-    if (previous !== "") {
-        let prevLink = video.previous;
-        window.location.href = prevLink;
+    if (video.currentTime < 3) { // go to the previous video
+        window.history.back();
     }
-    else {
-        console.log("No previous video!"); 
+    else { // replay the current video
+        video.currentTime = 0;
     }
     return previous; 
 }

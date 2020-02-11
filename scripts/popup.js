@@ -9,7 +9,6 @@ const state = {
 function setState(newState) {
     if (newState.tabs) {
         state.tabs = newState.tabs;
-        console.log("state: ", state);
     }
     else {
         console.log("Incorrect newState!");
@@ -82,12 +81,31 @@ function clickNext(tabId) {
 
 function clickVolume(tabId) {
     chrome.tabs.executeScript(tabId, {
-        file: "scripts/execute/volume.js"
+        file: "scripts/execute/mute.js"
     }, function(volume) {
+        console.log("volume: ", volume);
         const volumeButton = document.getElementById(`${"volume" + tabId}`);
-        console.log("currentVolume: ", volume);
+        let resultingVolume = determineVolumeButton(volume[0]);
+        console.log("resulting Volume: ", resultingVolume);
+        if (volumeButton.classList.contains("fa-volume-up")) {
+            volumeButton.classList.add("fa-volume-mute");
+            volumeButton.classList.remove("fa-volume-up");
+            console.log("removed volume up: ", volumeButton);
+        } else if (volumeButton.classList.contains("fa-volume-down")) {
+            volumeButton.classList.add(resultingVolume);
+            volumeButton.classList.remove("fa-volume-down");
+            console.log("removed volume down")
+        } else if (volumeButton.classList.contains("fa-volume-mute")) {
+            volumeButton.classList.add(resultingVolume);
+            volumeButton.classList.remove("fa-volume-mute");
+            console.log("removed volume mute")
+        }
     }
     )
+}
+
+function adjustVolume(tabId) {
+
 }
 
 
