@@ -1,16 +1,27 @@
 body, html {
     margin: 0;
     padding: 0;
-    color: rgb(57, 57, 253);
+    color: white;
+    background-image: linear-gradient(to right, rgb(240, 191, 86), rgb(231, 150, 164));
     width: 240px;
     height: 120px;
     text-align: center;
     font-family: 'Roboto', sans-serif;
     font-size: 10px;
+    font-weight: bold;
 }
 
 h2 {
     margin-bottom: 0px;
+}
+
+.icon-container{
+    border-radius: 50%;
+    height: auto;
+    width: 15%;
+    background-color: rgb(148, 147, 147);
+    margin: 5px auto;
+    text-align: center;
 }
 
 .green {
@@ -21,25 +32,32 @@ h2 {
     color: rgb(161, 161, 161);
 }
 
-.navbar i {
-    margin: 16px 8px;
-    transition-property: color;
+.navbar {
+    display: flex;
+    text-align: center;
+}
+
+.navbar div {
+    transition-property: background-color;
     transition-duration: 0.5s;
 }
 
-.navbar i:hover {
-    color: rgb(40, 8, 219);
+.navbar div:hover {
+    background-color: rgb(192, 192, 192);
+}
+
+.navbar i{
+    margin: 8px;
 }
 
 .single-tab {
-    border-bottom: 1px solid blue;
-    padding: 8px;
+    padding: 10px;
     transition-property: background;
     transition-duration: 1s;
 }
 
 .single-tab:hover {
-    background-color: rgb(240, 253, 255);
+    background-image: linear-gradient(to right, rgb(238, 193, 97), rgb(224, 96, 117));
 }
 
 .slider {

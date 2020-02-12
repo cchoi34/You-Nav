@@ -41,7 +41,7 @@ function getYoutubeTabs(port) {
     chrome.tabs.query({
         url: "*://www.youtube.com/watch?v*",
     }, (tabs) => {
-        console.log("Tabs in background: ", tabs);
+        console.log("TABS query: ", tabs)
         clearState();
         tabs.forEach(tab => {
             chrome.tabs.executeScript(tab.id, {

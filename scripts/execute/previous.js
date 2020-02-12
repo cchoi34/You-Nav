@@ -6,7 +6,8 @@ function loadPrevious() {
     else { // replay the current video
         video.currentTime = 0;
     }
-    return previous; 
+    console.log("window history: ", window.history)
+    return window.history; 
 }
 
 loadPrevious();

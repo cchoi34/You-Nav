@@ -21,8 +21,23 @@ function setState(newState) {
 port.postMessage("load initial data");
 
 port.onMessage.addListener(function(message) {
-    setState(message);
-    console.log("current State: ", state);
+    let copy = message.tabs;
+    let loading = false;
+    copy.forEach((tab) => {
+        if (tab.status === "complete") {
+            loading = true;
+        }
+        else {
+            loading = false;
+        }
+    })
+
+    if (!loading) {
+        loadingState();
+        port.postMessage("get next state");
+    } else {
+        setState(message);
+    }
 })
 
 function clickPlayPause(tabId) {
@@ -47,16 +62,13 @@ function clickLoop(tabId) {
     }, function(isLooped) {
         const loopBut = document.getElementById(`${"loop" + tabId}`);
         if (!isLooped[0]) {
-            loopBut.classList.add("fa-random");
-            loopBut.classList.remove("fa-retweet");
+            loopBut.classList.add("grey");
         }
         else {
-            loopBut.classList.remove("fa-random");
-            loopBut.classList.add("fa-retweet");
+            loopBut.classList.remove("grey");
         }
     }
     )
-    port.postMessage("update state");
 }
 
 function clickPrevious(tabId) {
@@ -65,6 +77,7 @@ function clickPrevious(tabId) {
     }, function(hasPrev) {
         const prevButton = document.getElementById(`${"previous" + tabId}`);
         console.log("HasPrev: ", hasPrev);
+        port.postMessage("load previous video");
     }
     )
 }
@@ -75,6 +88,7 @@ function clickNext(tabId) {
     }, function(hasNext) {
         const nextButton = document.getElementById(`${"next" + tabId}`);
         console.log("HasNext: ", hasNext);
+        port.postMessage("load next video");
     }
     )
 }
@@ -99,9 +113,6 @@ function clickVolume(tabId) {
     )
 }
 
-function adjustVolume(tabId) {
+// function adjustVolume(tabId) {
 
-}
-
-
-
+// }
