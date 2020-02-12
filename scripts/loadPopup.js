@@ -8,7 +8,7 @@ function determineVolumeButton(volumeLevel) {
         return "fa-volume-down";
     }
     else if (volumeLevel === 0) {
-        return "fa-volume-mute";
+        return "fa-volume-off";
     }
 }
 

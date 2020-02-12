@@ -83,22 +83,17 @@ function clickVolume(tabId) {
     chrome.tabs.executeScript(tabId, {
         file: "scripts/execute/mute.js"
     }, function(volume) {
-        console.log("volume: ", volume);
         const volumeButton = document.getElementById(`${"volume" + tabId}`);
         let resultingVolume = determineVolumeButton(volume[0]);
-        console.log("resulting Volume: ", resultingVolume);
         if (volumeButton.classList.contains("fa-volume-up")) {
-            volumeButton.classList.add("fa-volume-mute");
+            volumeButton.classList.add("fa-volume-off");
             volumeButton.classList.remove("fa-volume-up");
-            console.log("removed volume up: ", volumeButton);
         } else if (volumeButton.classList.contains("fa-volume-down")) {
             volumeButton.classList.add(resultingVolume);
             volumeButton.classList.remove("fa-volume-down");
-            console.log("removed volume down")
-        } else if (volumeButton.classList.contains("fa-volume-mute")) {
+        } else if (volumeButton.classList.contains("fa-volume-off")) {
             volumeButton.classList.add(resultingVolume);
-            volumeButton.classList.remove("fa-volume-mute");
-            console.log("removed volume mute")
+            volumeButton.classList.remove("fa-volume-off");
         }
     }
     )

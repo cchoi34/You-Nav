@@ -1,4 +1,4 @@
-function toggleMute(basevolume) {
+function toggleMute(baseVolume) {
     const video = document.querySelector("video");
     if (video.volume !== 0) {
         video.volume = 0;
@@ -6,7 +6,6 @@ function toggleMute(basevolume) {
     else {
         video.volume = baseVolume;
     }
-    console.log("video after mute: ", video.volume)
     return video.volume; 
 }
 
